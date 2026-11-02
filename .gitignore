@@ -15,19 +15,6 @@ datasets/**/*.png
 datasets/**/*.webp
 datasets/**/*.bmp
 
-# Model checkpoints
-*.pth
-*.pt
-*.onnx
-*.h5
-*.pkl
-
-# Training outputs
-runs/
-logs/
-wandb/
-tensorboard/
-
 # IDE
 .vscode/
 .idea/
