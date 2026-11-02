@@ -1,0 +1,37 @@
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Dataset images
+datasets/**/*.jpg
+datasets/**/*.jpeg
+datasets/**/*.png
+datasets/**/*.webp
+datasets/**/*.bmp
+
+# Model checkpoints
+*.pth
+*.pt
+*.onnx
+*.h5
+*.pkl
+
+# Training outputs
+runs/
+logs/
+wandb/
+tensorboard/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,616 @@
+{
+  "model": "ResNet18",
+  "test_images": 380,
+  "correct": 300,
+  "incorrect": 80,
+  "accuracy": 0.7895,
+  "mistakes": [
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/cardboard/cardboard111.jpg",
+      "true": "cardboard",
+      "pred": "trash",
+      "confidence": 0.3791
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/cardboard/cardboard128.jpg",
+      "true": "cardboard",
+      "pred": "trash",
+      "confidence": 0.4858
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/cardboard/cardboard143.jpg",
+      "true": "cardboard",
+      "pred": "metal",
+      "confidence": 0.5851
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/cardboard/cardboard171.jpg",
+      "true": "cardboard",
+      "pred": "glass",
+      "confidence": 0.5702
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/cardboard/cardboard286.jpg",
+      "true": "cardboard",
+      "pred": "paper",
+      "confidence": 0.6126
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass107.jpg",
+      "true": "glass",
+      "pred": "metal",
+      "confidence": 0.6044
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass166.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.9857
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass181.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.979
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass183.jpg",
+      "true": "glass",
+      "pred": "paper",
+      "confidence": 0.6501
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass184.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.4732
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass208.jpg",
+      "true": "glass",
+      "pred": "paper",
+      "confidence": 0.8194
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass214.jpg",
+      "true": "glass",
+      "pred": "trash",
+      "confidence": 0.9941
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass228.jpg",
+      "true": "glass",
+      "pred": "metal",
+      "confidence": 0.9658
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass240.jpg",
+      "true": "glass",
+      "pred": "trash",
+      "confidence": 0.6235
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass263.jpg",
+      "true": "glass",
+      "pred": "metal",
+      "confidence": 0.4733
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass265.jpg",
+      "true": "glass",
+      "pred": "paper",
+      "confidence": 0.5438
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass269.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.9892
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass27.jpg",
+      "true": "glass",
+      "pred": "metal",
+      "confidence": 0.8391
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass304.jpg",
+      "true": "glass",
+      "pred": "paper",
+      "confidence": 0.9616
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass322.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.8946
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass327.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.6196
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass348.jpg",
+      "true": "glass",
+      "pred": "metal",
+      "confidence": 0.6331
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass385.jpg",
+      "true": "glass",
+      "pred": "cardboard",
+      "confidence": 0.9967
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass400.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.4615
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass401.jpg",
+      "true": "glass",
+      "pred": "cardboard",
+      "confidence": 0.7853
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass459.jpg",
+      "true": "glass",
+      "pred": "cardboard",
+      "confidence": 0.67
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass480.jpg",
+      "true": "glass",
+      "pred": "metal",
+      "confidence": 0.556
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass55.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.5615
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/glass/glass6.jpg",
+      "true": "glass",
+      "pred": "plastic",
+      "confidence": 0.6529
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal103.jpg",
+      "true": "metal",
+      "pred": "plastic",
+      "confidence": 0.9376
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal116.jpg",
+      "true": "metal",
+      "pred": "glass",
+      "confidence": 0.9025
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal126.jpg",
+      "true": "metal",
+      "pred": "glass",
+      "confidence": 0.4799
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal174.jpg",
+      "true": "metal",
+      "pred": "glass",
+      "confidence": 0.9126
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal259.jpg",
+      "true": "metal",
+      "pred": "cardboard",
+      "confidence": 0.8999
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal358.jpg",
+      "true": "metal",
+      "pred": "plastic",
+      "confidence": 0.9006
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal365.jpg",
+      "true": "metal",
+      "pred": "cardboard",
+      "confidence": 0.869
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal64.jpg",
+      "true": "metal",
+      "pred": "plastic",
+      "confidence": 0.3509
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/metal/metal87.jpg",
+      "true": "metal",
+      "pred": "cardboard",
+      "confidence": 0.6567
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper111.jpg",
+      "true": "paper",
+      "pred": "cardboard",
+      "confidence": 0.691
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper113.jpg",
+      "true": "paper",
+      "pred": "cardboard",
+      "confidence": 0.5237
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper235.jpg",
+      "true": "paper",
+      "pred": "metal",
+      "confidence": 0.523
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper243.jpg",
+      "true": "paper",
+      "pred": "metal",
+      "confidence": 0.7131
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper251.jpg",
+      "true": "paper",
+      "pred": "metal",
+      "confidence": 0.8768
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper370.jpg",
+      "true": "paper",
+      "pred": "plastic",
+      "confidence": 0.453
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper394.jpg",
+      "true": "paper",
+      "pred": "metal",
+      "confidence": 0.825
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper406.jpg",
+      "true": "paper",
+      "pred": "plastic",
+      "confidence": 0.8708
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper508.jpg",
+      "true": "paper",
+      "pred": "cardboard",
+      "confidence": 0.3876
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper535.jpg",
+      "true": "paper",
+      "pred": "trash",
+      "confidence": 0.8998
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper539.jpg",
+      "true": "paper",
+      "pred": "cardboard",
+      "confidence": 0.6305
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/paper/paper8.jpg",
+      "true": "paper",
+      "pred": "glass",
+      "confidence": 0.5168
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic10.jpg",
+      "true": "plastic",
+      "pred": "metal",
+      "confidence": 0.6091
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic109.jpg",
+      "true": "plastic",
+      "pred": "cardboard",
+      "confidence": 0.7362
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic167.jpg",
+      "true": "plastic",
+      "pred": "trash",
+      "confidence": 0.59
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic199.jpg",
+      "true": "plastic",
+      "pred": "metal",
+      "confidence": 0.8361
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic204.jpg",
+      "true": "plastic",
+      "pred": "trash",
+      "confidence": 0.6803
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic261.jpg",
+      "true": "plastic",
+      "pred": "cardboard",
+      "confidence": 0.9898
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic264.jpg",
+      "true": "plastic",
+      "pred": "glass",
+      "confidence": 0.4296
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic304.jpg",
+      "true": "plastic",
+      "pred": "metal",
+      "confidence": 0.6
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic359.jpg",
+      "true": "plastic",
+      "pred": "paper",
+      "confidence": 0.5691
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic368.jpg",
+      "true": "plastic",
+      "pred": "trash",
+      "confidence": 0.8123
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic392.jpg",
+      "true": "plastic",
+      "pred": "paper",
+      "confidence": 0.561
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic435.jpg",
+      "true": "plastic",
+      "pred": "glass",
+      "confidence": 0.612
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic441.jpg",
+      "true": "plastic",
+      "pred": "metal",
+      "confidence": 0.479
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic454.jpg",
+      "true": "plastic",
+      "pred": "metal",
+      "confidence": 0.6497
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic455.jpg",
+      "true": "plastic",
+      "pred": "paper",
+      "confidence": 0.9685
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic456.jpg",
+      "true": "plastic",
+      "pred": "metal",
+      "confidence": 0.991
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic479.jpg",
+      "true": "plastic",
+      "pred": "trash",
+      "confidence": 0.9963
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic480.jpg",
+      "true": "plastic",
+      "pred": "paper",
+      "confidence": 0.4623
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic86.jpg",
+      "true": "plastic",
+      "pred": "glass",
+      "confidence": 0.7782
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic9.jpg",
+      "true": "plastic",
+      "pred": "glass",
+      "confidence": 0.5426
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/plastic/plastic97.jpg",
+      "true": "plastic",
+      "pred": "paper",
+      "confidence": 0.6907
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash107.jpg",
+      "true": "trash",
+      "pred": "paper",
+      "confidence": 0.542
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash108.jpg",
+      "true": "trash",
+      "pred": "metal",
+      "confidence": 0.7339
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash117.jpg",
+      "true": "trash",
+      "pred": "glass",
+      "confidence": 0.6122
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash130.jpg",
+      "true": "trash",
+      "pred": "paper",
+      "confidence": 0.5536
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash31.jpg",
+      "true": "trash",
+      "pred": "glass",
+      "confidence": 0.7398
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash62.jpg",
+      "true": "trash",
+      "pred": "metal",
+      "confidence": 0.9465
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash66.jpg",
+      "true": "trash",
+      "pred": "paper",
+      "confidence": 0.5292
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash85.jpg",
+      "true": "trash",
+      "pred": "metal",
+      "confidence": 0.7651
+    },
+    {
+      "file": "/home/phuanh/PRJ3/AI_Waste_Classification/datasets/split/test/trash/trash92.jpg",
+      "true": "trash",
+      "pred": "metal",
+      "confidence": 0.2656
+    }
+  ],
+  "confusion_pairs": [
+    {
+      "true": "glass",
+      "predicted": "plastic",
+      "count": 9
+    },
+    {
+      "true": "glass",
+      "predicted": "metal",
+      "count": 6
+    },
+    {
+      "true": "plastic",
+      "predicted": "metal",
+      "count": 6
+    },
+    {
+      "true": "plastic",
+      "predicted": "paper",
+      "count": 5
+    },
+    {
+      "true": "glass",
+      "predicted": "paper",
+      "count": 4
+    },
+    {
+      "true": "paper",
+      "predicted": "cardboard",
+      "count": 4
+    },
+    {
+      "true": "paper",
+      "predicted": "metal",
+      "count": 4
+    },
+    {
+      "true": "plastic",
+      "predicted": "trash",
+      "count": 4
+    },
+    {
+      "true": "plastic",
+      "predicted": "glass",
+      "count": 4
+    },
+    {
+      "true": "trash",
+      "predicted": "metal",
+      "count": 4
+    },
+    {
+      "true": "glass",
+      "predicted": "cardboard",
+      "count": 3
+    },
+    {
+      "true": "metal",
+      "predicted": "plastic",
+      "count": 3
+    },
+    {
+      "true": "metal",
+      "predicted": "glass",
+      "count": 3
+    },
+    {
+      "true": "metal",
+      "predicted": "cardboard",
+      "count": 3
+    },
+    {
+      "true": "trash",
+      "predicted": "paper",
+      "count": 3
+    },
+    {
+      "true": "cardboard",
+      "predicted": "trash",
+      "count": 2
+    },
+    {
+      "true": "glass",
+      "predicted": "trash",
+      "count": 2
+    },
+    {
+      "true": "paper",
+      "predicted": "plastic",
+      "count": 2
+    },
+    {
+      "true": "plastic",
+      "predicted": "cardboard",
+      "count": 2
+    },
+    {
+      "true": "trash",
+      "predicted": "glass",
+      "count": 2
+    },
+    {
+      "true": "cardboard",
+      "predicted": "metal",
+      "count": 1
+    },
+    {
+      "true": "cardboard",
+      "predicted": "glass",
+      "count": 1
+    },
+    {
+      "true": "cardboard",
+      "predicted": "paper",
+      "count": 1
+    },
+    {
+      "true": "paper",
+      "predicted": "trash",
+      "count": 1
+    },
+    {
+      "true": "paper",
+      "predicted": "glass",
+      "count": 1
+    }
+  ]
+}
