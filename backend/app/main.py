@@ -1,6 +1,8 @@
 """FastAPI application entry point."""
 
 import logging
+from contextlib import asynccontextmanager
+from collections.abc import AsyncIterator
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
@@ -11,11 +13,23 @@ from app.api.routes.predictions import router
 from app.core.config import MAX_REQUEST_BYTES
 from app.core.middleware import RequestSizeLimitMiddleware
 from app.schemas.prediction import ErrorResponse
+from app.services.classifier import classifier_service
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    """Load the classifier before serving requests and clean it up at shutdown."""
+    try:
+        classifier_service.load()
+        yield
+    finally:
+        classifier_service.cleanup()
 
 api = FastAPI(
     title="AI Trash Classifier Backend",
     version="0.1.0",
-    description="Image upload and classifier API. Prediction remains unavailable until an AI model is confirmed and integrated.",
+    description="Image upload and trash classification API powered by the configured ResNet18 model.",
+    lifespan=lifespan,
 )
 api.include_router(router)
 

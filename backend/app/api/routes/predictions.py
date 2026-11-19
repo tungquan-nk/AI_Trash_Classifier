@@ -5,6 +5,7 @@ import warnings
 
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from PIL import Image, UnidentifiedImageError
+from starlette.concurrency import run_in_threadpool
 
 from app.core.config import (
     MAX_IMAGE_HEIGHT,
@@ -81,7 +82,7 @@ async def predict(file: UploadFile = File(...)) -> PredictionResponse:
         await file.close()
     validate_image(data)
     try:
-        predictions = classifier_service.predict(data)
+        predictions = await run_in_threadpool(classifier_service.predict, data)
     except ClassifierNotReadyError as exc:
         raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc)) from exc
     return PredictionResponse(filename=file.filename or "upload", predictions=predictions)

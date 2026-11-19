@@ -1,13 +1,17 @@
 """API and upload safety tests."""
 
 from io import BytesIO
+import math
 from pathlib import Path
 import struct
 import sys
 import zlib
+from unittest.mock import Mock
 
 from fastapi.testclient import TestClient
 from PIL import Image
+import pytest
+import torch
 
 # Keep the backend's ``app`` package distinct from the repository-root app.py.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -70,25 +74,31 @@ def test_corrupt_image_that_cannot_be_decoded_is_rejected() -> None:
     assert response.json() == {"detail": "Uploaded file is not a valid image."}
 
 
-def test_image_over_pixel_limit_is_rejected_before_classifier() -> None:
+def test_image_over_pixel_limit_is_rejected_before_classifier(monkeypatch) -> None:
     width = MAX_IMAGE_WIDTH + 1
     height = max(1, (MAX_IMAGE_PIXELS // width) + 1)
     oversized_dimensions = make_png_header_with_dimensions(width, height)
+    predict = Mock()
+    monkeypatch.setattr(prediction_routes.classifier_service, "predict", predict)
     response = client.post(
         "/api/predict",
         files={"file": ("large-dimensions.png", oversized_dimensions, "image/png")},
     )
     assert response.status_code == 413
     assert response.json() == {"detail": "Image dimensions exceed the supported limits."}
+    predict.assert_not_called()
 
 
-def test_file_over_limit_is_rejected() -> None:
+def test_file_over_limit_is_rejected(monkeypatch) -> None:
+    predict = Mock()
+    monkeypatch.setattr(prediction_routes.classifier_service, "predict", predict)
     response = client.post(
         "/api/predict",
         files={"file": ("too-large.png", b"x" * (MAX_UPLOAD_BYTES + 1), "image/png")},
     )
     assert response.status_code == 413
     assert response.json() == {"detail": "Image exceeds the upload size limit."}
+    predict.assert_not_called()
 
 
 def test_total_request_limit_without_content_length_is_rejected() -> None:
@@ -116,8 +126,36 @@ def test_valid_image_reports_model_not_ready() -> None:
     )
     assert response.status_code == 503
     assert response.json() == {
-        "detail": "Prediction is unavailable: the AI model has not been integrated."
+        "detail": "Prediction is unavailable: the model is not loaded."
     }
+
+
+class FixedLogitsModel(torch.nn.Module):
+    def forward(self, images: torch.Tensor) -> torch.Tensor:
+        return torch.tensor([[0.0, 2.0, 1.0]], device=images.device).expand(images.shape[0], -1)
+
+
+def test_valid_image_with_model_returns_prediction_response(monkeypatch) -> None:
+    service = prediction_routes.classifier_service
+    monkeypatch.setattr(service, "model", FixedLogitsModel())
+    monkeypatch.setattr(service, "classes", ["cardboard", "metal", "glass"])
+    monkeypatch.setattr(service, "device", "cpu")
+    monkeypatch.setattr(service, "_transform", None)
+
+    response = client.post(
+        "/api/predict",
+        files={"file": ("sample.png", make_png(), "image/png")},
+    )
+
+    exponential_sum = sum(math.exp(value) for value in (0.0, 2.0, 1.0))
+    assert response.status_code == 200
+    assert response.json()["filename"] == "sample.png"
+    predictions = response.json()["predictions"]
+    assert [item["label"] for item in predictions] == ["metal", "glass", "cardboard"]
+    assert [item["confidence"] for item in predictions] == pytest.approx(
+        [math.exp(2.0) / exponential_sum, math.exp(1.0) / exponential_sum, 1.0 / exponential_sum]
+    )
+    assert set(response.json()) == {"filename", "predictions"}
 
 
 def test_unexpected_classifier_error_does_not_leak_internal_details(monkeypatch) -> None:
