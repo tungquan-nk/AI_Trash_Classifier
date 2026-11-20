@@ -118,6 +118,34 @@ def test_preprocessing_matches_rgb_resize_crop_tensor_and_normalize(monkeypatch)
     torch.testing.assert_close(model.seen_input, expected, rtol=1e-5, atol=1e-5)
 
 
+def test_preprocessing_matches_reference_for_non_square_color_pattern(monkeypatch) -> None:
+    from torchvision import models, transforms
+
+    service, model = ready_service(monkeypatch)
+    image = Image.new("RGB", (341, 257))
+    pixels = image.load()
+    for y in range(image.height):
+        for x in range(image.width):
+            pixels[x, y] = ((x * 3 + y) % 256, (x + y * 5) % 256, (x * 7 + y * 2) % 256)
+
+    service.predict(encode_image(image))
+
+    weight_transform = models.ResNet18_Weights.DEFAULT.transforms()
+    # Build the reference independently from the documented evaluation pipeline.
+    reference_transform = transforms.Compose(
+        [
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=weight_transform.mean, std=weight_transform.std),
+        ]
+    )
+    expected = reference_transform(image).unsqueeze(0)
+    assert model.seen_input is not None
+    assert model.seen_input.shape == (1, 3, 224, 224)
+    torch.testing.assert_close(model.seen_input, expected, rtol=0, atol=0)
+
+
 @pytest.mark.parametrize(
     "image",
     [Image.new("RGBA", (12, 9), (20, 100, 200, 128)), Image.new("L", (12, 9), 127)],
