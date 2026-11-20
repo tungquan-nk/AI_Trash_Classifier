@@ -73,7 +73,8 @@ class ClassifierService:
         except Exception as exc:
             raise ModelLoadError(
                 f"Could not load checkpoint into ResNet18 from {checkpoint_path}; "
-                "the checkpoint may be incompatible with this architecture"
+                "the checkpoint may be incompatible with this architecture; "
+                f"cause: {type(exc).__name__}: {exc}"
             ) from exc
 
         self.model = model

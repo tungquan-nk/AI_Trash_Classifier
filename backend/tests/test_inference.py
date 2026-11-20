@@ -15,21 +15,7 @@ from app.core import config
 from app.services.classifier import ClassifierNotReadyError, ClassifierService
 
 
-class FixedLogitsModel(torch.nn.Module):
-    def __init__(self, logits: list[float] | None = None) -> None:
-        super().__init__()
-        self.logits = logits or [0.0, 2.0, 1.0]
-        self.seen_shape: tuple[int, ...] | None = None
-        self.seen_device: torch.device | None = None
-        self.inference_mode: bool | None = None
-        self.seen_input: torch.Tensor | None = None
-
-    def forward(self, image_tensor: torch.Tensor) -> torch.Tensor:
-        self.seen_shape = tuple(image_tensor.shape)
-        self.seen_device = image_tensor.device
-        self.inference_mode = torch.is_inference_mode_enabled()
-        self.seen_input = image_tensor.detach().clone()
-        return torch.tensor([self.logits], dtype=torch.float32, device=image_tensor.device)
+from conftest import FixedLogitsModel
 
 
 def encode_image(image: Image.Image, image_format: str = "PNG") -> bytes:

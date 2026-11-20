@@ -1,24 +1,28 @@
 """API and upload safety tests."""
 
 from io import BytesIO
+import asyncio
 import math
 from pathlib import Path
 import struct
 import sys
+import threading
 import zlib
 from unittest.mock import Mock
 
+import httpx
 from fastapi.testclient import TestClient
 from PIL import Image
 import pytest
-import torch
 
 # Keep the backend's ``app`` package distinct from the repository-root app.py.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.core.config import MAX_IMAGE_PIXELS, MAX_IMAGE_WIDTH, MAX_REQUEST_BYTES, MAX_UPLOAD_BYTES
+from app.core import config
 from app.api.routes import predictions as prediction_routes
 from app.main import app
+from conftest import FixedLogitsModel
 
 client = TestClient(app)
 
@@ -130,13 +134,9 @@ def test_valid_image_reports_model_not_ready() -> None:
     }
 
 
-class FixedLogitsModel(torch.nn.Module):
-    def forward(self, images: torch.Tensor) -> torch.Tensor:
-        return torch.tensor([[0.0, 2.0, 1.0]], device=images.device).expand(images.shape[0], -1)
-
-
 def test_valid_image_with_model_returns_prediction_response(monkeypatch) -> None:
     service = prediction_routes.classifier_service
+    monkeypatch.setattr(config, "MODEL_TOP_K", 3)
     monkeypatch.setattr(service, "model", FixedLogitsModel())
     monkeypatch.setattr(service, "classes", ["cardboard", "metal", "glass"])
     monkeypatch.setattr(service, "device", "cpu")
@@ -156,6 +156,48 @@ def test_valid_image_with_model_returns_prediction_response(monkeypatch) -> None
         [math.exp(2.0) / exponential_sum, math.exp(1.0) / exponential_sum, 1.0 / exponential_sum]
     )
     assert set(response.json()) == {"filename", "predictions"}
+
+
+@pytest.fixture
+def anyio_backend() -> str:
+    return "asyncio"
+
+
+@pytest.mark.anyio
+async def test_health_remains_responsive_while_prediction_is_running(monkeypatch) -> None:
+    started = threading.Event()
+    release = threading.Event()
+    result_state: dict[str, bool | None] = {"released": None}
+
+    def blocking_predict(image_bytes: bytes) -> list[dict[str, str | float]]:
+        started.set()
+        result_state["released"] = release.wait(timeout=5)
+        return [{"label": "cardboard", "confidence": 1.0}]
+
+    monkeypatch.setattr(prediction_routes.classifier_service, "predict", blocking_predict)
+    transport = httpx.ASGITransport(app=app)
+    async with httpx.AsyncClient(transport=transport, base_url="http://test") as async_client:
+        prediction_task = asyncio.create_task(
+            async_client.post(
+                "/api/predict",
+                files={"file": ("sample.png", make_png(), "image/png")},
+            )
+        )
+        try:
+            started_in_time = await asyncio.get_running_loop().run_in_executor(
+                None, started.wait, 5
+            )
+            assert started_in_time is True
+            health_response = await async_client.get("/health")
+            assert health_response.status_code == 200
+            assert prediction_task.done() is False
+        finally:
+            release.set()
+
+        prediction_response = await asyncio.wait_for(prediction_task, timeout=5)
+
+    assert result_state["released"] is True
+    assert prediction_response.status_code == 200
 
 
 def test_unexpected_classifier_error_does_not_leak_internal_details(monkeypatch) -> None:

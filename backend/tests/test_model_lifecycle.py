@@ -156,9 +156,12 @@ def test_checkpoint_incompatibility_preserves_original_cause(monkeypatch, tmp_pa
     model.load_state_dict = Mock(side_effect=incompatibility)
     service = classifier_module.ClassifierService()
 
-    with pytest.raises(classifier_module.ModelLoadError, match="checkpoint may be incompatible") as error:
+    with pytest.raises(classifier_module.ModelLoadError) as error:
         service.load()
 
+    assert "the checkpoint may be incompatible with this architecture" in str(error.value)
+    assert "RuntimeError" in str(error.value)
+    assert "size mismatch" in str(error.value)
     assert error.value.__cause__ is incompatibility
     assert service.model is None
     assert service.classes is None
@@ -171,9 +174,12 @@ def test_torch_load_failure_preserves_cause_and_does_not_commit_state(monkeypatc
     install_torch_stubs(monkeypatch, load_error=original_error)
     service = classifier_module.ClassifierService()
 
-    with pytest.raises(classifier_module.ModelLoadError, match="Could not load checkpoint") as error:
+    with pytest.raises(classifier_module.ModelLoadError) as error:
         service.load()
 
+    assert "the checkpoint may be incompatible with this architecture" in str(error.value)
+    assert "OSError" in str(error.value)
+    assert "cannot read state file" in str(error.value)
     assert error.value.__cause__ is original_error
     assert service.model is None
     assert service.classes is None
